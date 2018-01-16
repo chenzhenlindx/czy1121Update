@@ -18,7 +18,7 @@ import com.example.demo.domain.UpdateInfo;
 @RestController
 public class AppConttroller {
 	/**
-	 * http://rd.whhxts.com/app/check?package=app.pscm.grid&version=123&channel=yyb
+	 * http://10.129.51.27:8080/app/check?package=cn.czl.updatedemo&version=1&channel=main
 	 * 
 	 * @return
 	 * @throws FileNotFoundException
@@ -27,7 +27,6 @@ public class AppConttroller {
 	public UpdateInfo check(@RequestParam(name = "package", required = true) String pkg,
 			@RequestParam(name = "version", required = true) int version,
 			@RequestParam(name = "channel", required = true) String channel) throws FileNotFoundException {
-		System.out.println("check");
 		UpdateInfo updateInfo = new UpdateInfo();
 		if (version > 1) {
 			updateInfo.hasUpdate = false;
@@ -35,8 +34,7 @@ public class AppConttroller {
 			updateInfo.hasUpdate = true;
 			updateInfo.versionCode = 2;
 			updateInfo.versionName = "v2.0.2018-1-16";
-			updateInfo.updateContent = "1、修改了房屋的bug1；\r\n" + "2、修改了房屋的bug1；\r\n" + "3、修改了房屋的bug1；\r\n"
-					+ "4、修改了房屋的bug1；\r\n" + "5、修改了房屋的bug1。";
+			updateInfo.updateContent = "1、修改了bug1；\r\n" + "2、修改了bug2；\r\n" + "3、新增了某个功能。";
 
 			updateInfo.url = "http://10.129.51.27:8080/apk/apk2018-1-15.apk";
 			File file = ResourceUtils.getFile("classpath:static/apk/apk2018-1-15.apk");
