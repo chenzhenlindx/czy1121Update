@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +28,8 @@ public class AppConttroller {
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
 	public UpdateInfo check(@RequestParam(name = "package", required = true) String pkg,
 			@RequestParam(name = "version", required = true) int version,
-			@RequestParam(name = "channel", required = true) String channel) throws FileNotFoundException {
+			@RequestParam(name = "channel", required = true) String channel, HttpServletRequest request)
+			throws FileNotFoundException {
 		UpdateInfo updateInfo = new UpdateInfo();
 		if (version > 1) {
 			updateInfo.hasUpdate = false;
@@ -36,8 +39,9 @@ public class AppConttroller {
 			updateInfo.versionName = "v2.0.2018-1-16";
 			updateInfo.updateContent = "1、修改了bug1；\r\n" + "2、修改了bug2；\r\n" + "3、新增了某个功能。";
 
-			updateInfo.url = "http://10.129.51.4:8080/apk/apk2018-1-15.apk";
-			File file = ResourceUtils.getFile("classpath:static/apk/apk2018-1-15.apk");
+			updateInfo.url = "http://" + request.getRemoteHost() + ":" + request.getServerPort()
+					+ "/apk/apk2018-1-17.apk";
+			File file = ResourceUtils.getFile("classpath:static/apk/apk2018-1-17.apk");
 			updateInfo.md5 = md5(file);
 			updateInfo.size = file.length();
 		}
