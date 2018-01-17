@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         update(false);
     }
 
+    /**
+     * 初始化View，显示当前版本信息，设置button点击事件
+     */
     private void initViews() {
         ((TextView) findViewById(R.id.tv_version)).setText(AppUtils.getAppVersionName());
         findViewById(R.id.button).setOnClickListener(v -> update(true));
@@ -36,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void update(boolean isManual) {
         // 设置默认更新接口地址与渠道
-        UpdateManager.setUrl("http://10.129.51.27:8080/app/check", "yyb");
+        UpdateManager.setUrl("http://10.129.51.4:8080/app/check", "yyb");
         // 进入应用时查询更新
         UpdateManager.create(this)
+                //自定义更新提示框
                 .setPrompter(agent -> {
                     UpdateInfo updateInfo = agent.getInfo();
                     String size = Formatter.formatShortFileSize(MainActivity.this, updateInfo.size);
@@ -52,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
                             .onPositive((dialog, which) -> agent.update())
                             .show();
                 })
+                //更新失败给出提示
                 .setOnFailureListener(error -> ToastUtils.showShort(error.toString()))
+                //设置下载进度条
                 .setOnDownloadListener(new OnDownloadListener() {
                     private MaterialDialog dialog;
 
@@ -81,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setManual(isManual)
+                //开始更新
                 .check();
     }
 }

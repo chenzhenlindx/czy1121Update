@@ -36,7 +36,7 @@ public class AppConttroller {
 			updateInfo.versionName = "v2.0.2018-1-16";
 			updateInfo.updateContent = "1、修改了bug1；\r\n" + "2、修改了bug2；\r\n" + "3、新增了某个功能。";
 
-			updateInfo.url = "http://10.129.51.27:8080/apk/apk2018-1-15.apk";
+			updateInfo.url = "http://10.129.51.4:8080/apk/apk2018-1-15.apk";
 			File file = ResourceUtils.getFile("classpath:static/apk/apk2018-1-15.apk");
 			updateInfo.md5 = md5(file);
 			updateInfo.size = file.length();

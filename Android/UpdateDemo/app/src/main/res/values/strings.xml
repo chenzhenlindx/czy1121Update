@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">UpdateDemo</string>
     <string name="update_content">最新版本：%1$s\n新版本大小：%2$s\n\n更新内容：\n%3$s</string>
-
 </resources>
